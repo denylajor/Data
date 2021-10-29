@@ -6,7 +6,7 @@ class Auth extends MY_Controller
     public function index()
     {
         if ($this->session->userdata('user_login')) {
-            redirect('CHM');
+            redirect('Dashboard');
         } else {
             $this->load->view('Auth/login');
         }
@@ -31,8 +31,7 @@ class Auth extends MY_Controller
 
             $this->session->set_userdata('user_login', $session);
             HistoryLoginAndLogout("Login");
-
-            redirect('CHM');
+            redirect('Dashboard');
         } else {
             $this->session->set_flashdata('msg', 'Username Or Password is Invalid');
             redirect('Auth');
@@ -56,7 +55,7 @@ class Auth extends MY_Controller
             redirect('Auth/Logout');
         } else {
             $this->session->set_flashdata('error', 'Record Updated Failed..!');
-            redirect('CHM');
+            redirect('Dashboard');
         }
     }
 }

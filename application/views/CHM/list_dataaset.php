@@ -21,6 +21,29 @@
                             <option value="tbl_report_portal_BRI_MA_cc">Report Portal BRI MA (CC)</option>
                             <option value="tbl_report_ssb_hybrid_cc">Report SSB & Hybrid (CC)</option>
                             <option value="tbl_technical_report_cc">Technical Report (CC)</option>
+                            <option value="tbl_pengadaan_dan_distribusi_PO">Pengadaan & Distribusi </option>
+                            <option value="tbl_kendaraan_logistik">Kendaraan Logistik</option>
+                            <option value="tbl_ssb_pm_new">SSB PM New</option>
+                            <option value="tbl_crm_pm_new">CRM PM New</option>
+                            <option value="tbl_hybrid_pm_new">Hybrid PM New</option>
+                            <!-- <option value="tbl_bulanan_flm_700_crm">Bulanan FLM CRM 700</option> -->
+                            <option value="tbl_ssb_hybrid_new">SSB & Hybrid New</option>
+                            <option value="tbl_pm_edc_mandiri_fix">PM EDC Mandiri</option>
+                            <option value="tbl_vaksin">Vaksin</option>
+                            <option value="tbl_pengiriman_logistik">Loigistik Pengiriman</option>
+                            <option value="tbl_bulanan_flm_700_crm">FLM 700</option>
+                            <option value="tbl_bulanan_premises_700_crm">Premises 700</option>
+                            <option value="tbl_pertumbuhan_atm">Pertumbuhan ATM</option>
+                            <!-- <option value="tbl_perfomance_rpl_atm_bank_bjb">Peformance RPL ATM Bank BJB</option> -->
+                            <option value="tbl_timeline_ho_atm_bri_kolaborasi">Timeline HO ATM BRI Kolaborasi</option>
+                            <option value="tbl_timeline_ho_atm_bri_562">Timeline HO ATM BRI 562</option>
+                            <option value="tbl_timeline_ho_atm_bri_831">Timeline HO ATM BRI 831</option>
+                            <option value="tbl_pencapaian_reliability_cro_atm_bri_periode_harian">Pencapaian Reability CRO ATM BRI (Harian)</option>
+                            <option value="tbl_pencapaian_reliability_cro_atm_bri_periode_bulanan">Pencapaian Reability CRO ATM BRI (Bulanan)</option>
+                            <option value="tbl_perfomance_rpl_atm_bank_bjb">Peformance RPL ATM Bank BJB (Harian)</option>
+                            <option value="tbl_perfomance_rpl_atm_bank_bjb_periode_bulanan">Peformance RPL ATM Bank BJB (Bulanan)</option>
+                            <option value="tbl_proyeksi_pencapaian_reliability_cro_atm_bri_periode_harian">Proyeksi Pencapaian Reability CRO ATM BRI (Harian)
+                            <option value="tbl_proyeksi_pencapaian_reliability_cro_atm_bri_periode_bulanan">Proyeksi Pencapaian Reability CRO ATM BRI (Bulanan)
                         </select>
                     </div>
 
@@ -35,7 +58,7 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                        <div class="col-sm" style="width: 100%;">
+                        <div class="col-sm " style="width: 100%;">
                             <div>
                                 <a class="col-sm-" href="DataAset">Data Aset | </a>
                                 <a class="col-sm-" href="CM">CM | </a>
@@ -52,13 +75,38 @@
                                 <br>
                                 <hr>
                                 <a class="col-sm-" href="TechnicalReportCC">Technical Report (CC) | </a>
+                                <a class="col-sm-" href="PengadaanDanDistribusiPO">Pengadaan & Distribusi PO | </a>
+                                <a class="col-sm-" href="KendaraanLogistik">Kendaraan Logistik |</a>
+                                <a class="col-sm-" href="Logistikpeng">Logistik Pengiriman |</a>
+                                <a class="col-sm-" href="Ssbpm">SSB PM |</a>
+                                <a class="col-sm-" href="Crmpm">CRM PM |</a>
+                                <a class="col-sm-" href="Hybridpm">Hybrid PM |</a>
+                                <!-- <a class="col-sm-" href="Bulananflm">Bulanan FLM CRM 700 |</a> -->
+                                <a class="col-sm-" href="Ssbhybrid">SSB & Hybrid |</a>
+                                <a class="col-sm-" href="Vaksin">Vaksin |</a>
+                                <a class="col-sm-" href="Pmedcmandiri">PM EDC MANDIRI |</a>
+                                <br> <hr>
+                                <a class="col-sm-" href="Flm700">FLM 700 |</a>
+                                <a class="col-sm-" href="Premises700">Premises 700 |</a>
+                                <a class="col-sm-" href="PertumbuhanATM">Pertumbuhan ATM |</a>
+                                <a class="col-sm-" href="Tlatmbrikolab">Timeline HO ATM BRI Kolaborasi |</a>
+                                <a class="col-sm-" href="Tlatmbri562">Timeline HO ATM BRI 562 |</a>
+                                <a class="col-sm-" href="Tlatmbri831">Timeline HO ATM BRI 831 |</a>
+                                <br> <hr>
+                                <a class="col-sm-" href="Reabcroatmbri">Pencapaian Reability CRO ATM BRI (Harian) |</a>
+                                <a class="col-sm-" href="Reabcroatmbribul">Pencapaian Reability CRO ATM BRI (Bulanan) |</a>
+                                <a class="col-sm-" href="Propenreabbrihar">Proyeksi Pencapaian Reability CRO ATM BRI (Harian) |</a>
+                                <a class="col-sm-" href="Propenreabbribul">Proyeksi Pencapaian Reability CRO ATM BRI (Bulanan) |</a>
+                                <a class="col-sm-" href="Perrplbankbjb">Peformance RPL ATM Bank BJB (Harian) |</a>
+                                <a class="col-sm-" href="Perrplbankbjbbul">Peformance RPL ATM Bank BJB (Bulanan) |</a>
+                                <br> <hr>
                             </div>
                         </div>
                     </div>
                 </header>
                 <div class="panel-body">
-                    <table id="tableBarang" class="table table-bordered" style="width: 100%;">
-                        <thead>
+                    <table id="tableBarang" class="table table-bordered table-striped" style="width: 100%;">
+                        <thead style="background-color: #282828; color: white;">
                             <tr role="row">
                                 <th>No</th>
                                 <th>Terminal ID</th>
@@ -82,7 +130,7 @@
                                 <th>Tanggal Update</th>
                             </tr>
                         </thead>
-                        <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all" style="background-color: #aaaba9;"></tbody>
                     </table>
                 </div>
             </section>
@@ -119,122 +167,5 @@
             });
         }
 
-        // $('#addBarang').on('click', function(e) {
-        //     e.preventDefault();
-
-        //     $('#form')[0].reset();
-        //     $('#no_urut').val("");
-        //     $('#id_uker').val("").trigger('change');
-        //     $('#id_gbarang').val("").trigger('change');
-        //     $('#id_sgbarang').val("").trigger('change');
-        //     $('#id_merek').val("").trigger('change');
-        //     $('#id_tipe_barang').val("").trigger('change');
-        //     $('#formBarang').modal('show');
-        // });
-
     });
-
-    // $('body').on('shown.bs.modal', '.modal', function() {
-    //     $(this).find('select').each(function() {
-    //         var dropdownParent = $(document.body);
-    //         if ($(this).parents('.modal.in:first').length !== 0)
-    //             dropdownParent = $(this).parents('.modal.in:first');
-    //         $(this).select2({
-    //             dropdownParent: dropdownParent
-    //         });
-    //     });
-    // });
-
-    // function activeBarang(no_urut) {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes!",
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             $.ajax({
-    //                 type: "POST",
-    //                 data: {
-    //                     no_urut: no_urut
-    //                 },
-    //                 url: urlBarang + "activeBarang",
-    //                 dataType: 'JSON',
-    //                 success: function(response) {
-    //                     if (response) {
-    //                         Swal.fire(response, "", "success").then((result) => {
-    //                             table.ajax.reload(null, false);
-    //                         });
-    //                     } else {
-    //                         Swal.fire("Data gagal di delete!", "", "error");
-    //                     }
-    //                 },
-    //             });
-    //         }
-    //     });
-    // }
-
-    // $("#form").on("submit", function(event) {
-    //     event.preventDefault();
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: urlBarang + 'formBarang',
-    //         data: $(this).serialize(),
-    //         dataType: 'JSON',
-    //         success: function(data) {
-    //             Swal.fire(data.pesan, "", data.tipe).then((result) => {
-    //                 location.reload();
-    //                 $('#form')[0].reset();
-    //                 $('#id_uker').val("").trigger('change');
-    //                 $('#id_tipe_barang').val("").trigger('change');
-    //                 $('#formBarang').modal('hide');
-    //             });
-    //         },
-    //     });
-    // });
-
-    // function ChainedBarang(url, id_tujuan, tipe, no_urut = null) {
-    //     $.ajax({
-    //         type: "POST",
-    //         url: url,
-    //         dataType: "JSON",
-    //         beforeSend: function(e) {
-    //             if (e && e.overrideMimeType) {
-    //                 e.overrideMimeType("application/json;charset=UTF-8");
-    //             }
-    //         },
-    //         success: function(response) {
-    //             if (tipe == 'id_gbarang' || tipe == 'id_gbarang' + no_urut) {
-    //                 if (no_urut) {
-    //                     $('#id_sgbarang' + no_urut).val(null).trigger('change');
-    //                     $('#id_merek' + no_urut).val(null).trigger('change');
-    //                     $('#id_tipe_barang' + no_urut).val(null).trigger('change');
-    //                 } else {
-    //                     $('#id_sgbarang').val(null).trigger('change');
-    //                     $('#id_merek').val(null).trigger('change');
-    //                     $('#id_tipe_barang').val(null).trigger('change');
-    //                 }
-    //             } else if (tipe == 'id_sgbarang') {
-    //                 if (no_urut) {
-    //                     $('#id_merek' + no_urut).val(null).trigger('change');
-    //                     $('#id_tipe_barang' + no_urut).val(null).trigger('change');
-    //                 } else {
-    //                     $('#id_merek').val(null).trigger('change');
-    //                     $('#id_tipe_barang').val(null).trigger('change');
-    //                 }
-    //             } else if (tipe == 'id_merek') {
-    //                 if (no_urut) {
-    //                     $('#id_tipe_barang' + no_urut).val(null).trigger('change');
-    //                 } else {
-    //                     $('#id_tipe_barang').val(null).trigger('change');
-    //                 }
-    //             }
-    //             $(id_tujuan).html(response).show();
-    //         },
-    //     });
-    // }
 </script>

@@ -20,8 +20,8 @@ class DataAset extends MY_Controller
             'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
-        $this->header('Tabel Data Aset');
+        // cekPergroup();
+        $this->header('Data Aset');
         $this->load->view('CHM/list_dataaset', $data);
         $this->footer();
     }
@@ -32,7 +32,7 @@ class DataAset extends MY_Controller
             'tbl_data_aset',
             ['no', 'term_id', 'lokasi', 'alamat', 'kantor_layanan', 'uker_induk', 'cluster', 'jam_operational', 'garansi', 'cctv_ada', 'cctv_tidak_ada', 'ups_ada', 'ups_tidak_ada', 'latitude', 'longitude', 'pagu', 'denom', 'keterangan','user','tanggal_update'],
             ['term_id', 'lokasi', 'alamat', 'kantor_layanan', 'uker_induk', 'cluster', 'jam_operational', 'garansi', 'cctv_ada', 'cctv_tidak_ada', 'ups_ada', 'ups_tidak_ada', 'latitude', 'longitude', 'pagu', 'denom', 'keterangan','user','tanggal_update'],
-            ['no' => 'desc'],
+            ['no' => 'ASC'],
             null,
             'data'
         );

@@ -20,8 +20,8 @@ class PM extends MY_Controller
             'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
-        $this->header('Tabel PM');
+        // cekPergroup();
+        $this->header('PM');
         $this->load->view('CHM/list_pm', $data);
         $this->footer();
     }

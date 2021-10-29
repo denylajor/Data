@@ -20,8 +20,8 @@ class Offinflm extends MY_Controller
             'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
-        $this->header('Off In FLM');
+        // cekPergroup();
+        $this->header('Off Out FLM');
         $this->load->view('CHM/list_offoutflm', $data);
         $this->footer();
     }

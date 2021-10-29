@@ -20,8 +20,8 @@ class Reabilityperform extends MY_Controller
             'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
-        $this->header('Tabel Reability Perform');
+        // cekPergroup();
+        $this->header('Reability Perform');
         $this->load->view('CHM/list_reability', $data);
         $this->footer();
     }
@@ -32,7 +32,7 @@ class Reabilityperform extends MY_Controller
             'tbl_reability',
             ['no', 'TID', 'SN_Mesin', 'Tiket_MA', 'Tiket_ECH', 'Jenis', 'Vendor', 'Kanwil', 'Kanca', 'Lokasi', 'Tgl', 'Downtime', 'In_Out_SLA', 'Problem', 'Engineer', 'Status', 'Part', 'Action', 'Kondisi_Part', 'Keterangan', 'KOMITMEN_PENYELESAIAN', 'Tgl_Close', 'SLA', 'Penyelesaian', 'Tgl_req', 'Tgl_Kirim', 'Tgl_Terima','user','tanggal_update'],
             ['TID', 'SN_Mesin', 'Tiket_MA', 'Tiket_ECH', 'Jenis', 'Vendor', 'Kanwil', 'Kanca', 'Lokasi', 'Tgl', 'Downtime', 'In_Out_SLA', 'Problem', 'Engineer', 'Status', 'Part', 'Action', 'Kondisi_Part', 'Keterangan', 'KOMITMEN_PENYELESAIAN', 'Tgl_Close', 'SLA', 'Penyelesaian', 'Tgl_req', 'Tgl_Kirim', 'Tgl_Terima','user','tanggal_update'],
-            ['NO' => 'desc'],
+            ['NO' => 'ASC'],
             null,
             'data'
         );

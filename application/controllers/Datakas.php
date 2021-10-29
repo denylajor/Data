@@ -1,7 +1,6 @@
 <?php
 
-defined('BASEPATH') or exit('No direct script access allowed');
-
+defined('BASEPATH') or exit('No direct script access allowed');  
 class Datakas extends MY_Controller
 {
     public function __construct()
@@ -18,7 +17,7 @@ class Datakas extends MY_Controller
     {
 
         $data = array(
-            'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_layanan'"),
+            // 'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_layanan'"),
         );
 
         // cekPergroup();
@@ -33,9 +32,9 @@ class Datakas extends MY_Controller
         // cetak_die($list);
         $list = $this->Serverside->_serverSide(
             'Div_Layanan.tbl_data_kas',
-            ['no', 'kantor_cabang', 'tk_replenish', '__return', 'atm_replenish', 'average_tk', 'average_return', 'average_rpl','user','tanggal_update'],
-            ['kantor_cabang', 'tk_replenish', '__return', 'atm_replenish', 'average_tk', 'average_return', 'average_rpl','user','tanggal_update'],
-            ['no' => 'DESC '],
+            ['no', 'kantor_cabang', 'tk_replenish', 'return', 'atm_replenish', 'average_tk', 'average_return', 'average_rpl','user','tanggal_update'],
+            ['kantor_cabang', 'tk_replenish', 'return', 'atm_replenish', 'average_tk', 'average_return', 'average_rpl','user','tanggal_update'],
+            ['tanggal_update' => 'ASC '],
             null,
             'data'
         );
@@ -49,7 +48,7 @@ class Datakas extends MY_Controller
             $row[] = $no;
             $row[] = $results->kantor_cabang;
             $row[] = rupiah($results->tk_replenish);
-            $row[] = rupiah($results->__return);
+            $row[] = rupiah($results->return);
             $row[] = rupiah($results->atm_replenish);
             $row[] = rupiah($results->average_tk);
             $row[] = rupiah($results->average_return);

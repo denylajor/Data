@@ -14,19 +14,19 @@ class User extends MY_Controller
     public function index()
     {
         cekPergroup();
-        // $data['usersgroup'] = $this->General->fetch_records("v_subgroupuser", ['is_active' => 1]);
-        // $data['uker'] = $this->General->fetch_records("tbl_unit_kerja", ['is_active' => 1]);
+        $data['usersgroup'] = $this->General->fetch_records("v_subgroupuser", ['is_active' => 1]);
+        $data['uker'] = $this->General->fetch_records("tbl_unit_kerja", ['is_active' => 1]);
         $this->header('List User');
-        $this->load->view('User/list_user');
+        $this->load->view('User/list_user', $data);
         $this->footer();
     }
 
     public function listUser()
     {
         $list = $this->Serverside->_serverSide(
-            'tbl_user',
-            ['no', 'nama_user', 'username', 'is_active'],
-            ['nama_user', 'username'],
+            'v_user',
+            ['no', 'nama_uker', 'nama_subgroup', 'nama_user', 'username', 'is_active'],
+            ['nama_uker', 'nama_subgroup', 'nama_user', 'username'],
             ['id_user' => 'desc'],
             null,
             'data'
@@ -41,8 +41,8 @@ class User extends MY_Controller
             $row = array();
             $no++;
             $row[] = $no;
-            // $row[] = $results->nama_uker;
-            // $row[] = $results->nama_subgroup;
+            $row[] = $results->nama_uker;
+            $row[] = $results->nama_subgroup;
             $row[] = $results->nama_user;
             $row[] = $results->username;
             $row[] = statusActiveNonactive($results->is_active);
@@ -58,8 +58,8 @@ class User extends MY_Controller
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside->_countAll('tbl_user'),
-            "recordsFiltered" => $this->Serverside->_serverSide('tbl_user'),
+            "recordsTotal" => $this->Serverside->_countAll('v_user'),
+            "recordsFiltered" => $this->Serverside->_serverSide('v_user'),
             "data" => $data,
         );
 

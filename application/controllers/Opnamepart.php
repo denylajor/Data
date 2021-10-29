@@ -20,8 +20,8 @@ class Opnamepart extends MY_Controller
             'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
-        $this->header('Tabel Opname Part');
+        // cekPergroup();
+        $this->header('Opname Part');
         $this->load->view('CHM/list_opnamepart', $data);
         $this->footer();
     }
@@ -32,7 +32,7 @@ class Opnamepart extends MY_Controller
             'tbl_opnamepart',
             ['no', 'nama_barang', 'kode_barang', 'stok_awal', 'part_masuk', 'part_keluar', 'stok_akhir', 'total','user','tanggal_update'],
             ['nama_barang', 'kode_barang', 'stok_awal', 'part_masuk', 'part_keluar', 'stok_akhir', 'total','user','tanggal_update'],
-            ['nama_barang' => 'ASC'],
+            ['tanggal_update' => 'ASC'],
             null,
             'data'
         );

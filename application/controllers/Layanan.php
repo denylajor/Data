@@ -53,39 +53,29 @@ class Layanan extends MY_Controller
                         $STATUS_KENDARAAN = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
                         $PEMBAYARAN_GSM = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
                         $Keterangan = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-                        // $ups_tidak_ada = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                        // $latitude = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-                        // $longitude = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-                        // $pagu = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
-                        // $denom = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-                        // $Keterangan = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
 
                         $temp_data[] = array(
-                            'NO'    => $NO,
-                            'CABANG'    => $CABANG,
-                            'KODE'    => $KODE,
-                            'NO_POLISI'    => $NO_POLISI,
-                            'JENIS_KENDARAAN'    => $JENIS_KENDARAAN,
-                            'UKER'    => $UKER,
-                            'TAHUN'    => $TAHUN,
-                            'NO_GSM'    => $NO_GSM,
-                            'IMEI'    => $IMEI,
-                            'STATUS_KENDARAAN'    => $STATUS_KENDARAAN,
-                            'PEMBAYARAN_GSM'    => $PEMBAYARAN_GSM,
-                            'Keterangan'    => $Keterangan,
-                            // 'ups_tidak_ada'    => $ups_tidak_ada,
-                            // 'latitude'    => $latitude,
-                            // 'longitude'    => $longitude,
-                            // 'pagu'    => $pagu,
-                            // 'denom'    => $denom,
-                            // 'keterangan'    => $keterangan,
-                            'user' => $this->session->userdata("user_login")['username']
+                            'NO'                    => $NO,
+                            'CABANG'                => $CABANG,
+                            'KODE'                  => $KODE,
+                            'NO_POLISI'             => $NO_POLISI,
+                            'JENIS_KENDARAAN'       => $JENIS_KENDARAAN,
+                            'UKER'                  => $UKER,
+                            'TAHUN'                 => $TAHUN,
+                            'NO_GSM'                => $NO_GSM,
+                            'IMEI'                  => $IMEI,
+                            'STATUS_KENDARAAN'      => $STATUS_KENDARAAN,
+                            'PEMBAYARAN_GSM'        => $PEMBAYARAN_GSM,
+                            'Keterangan'            => $Keterangan,
+                            'user'                  => $this->session->userdata("user_login")['username']
 
                         );
+                        //delete data
+                        $this->db->query("DELETE FROM Div_Layanan.gps_kendaraan IMEI = '".$IMEI."'"); 
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
+                //insert data
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
                 // lastq();
                 if ($insert) {
@@ -102,7 +92,7 @@ class Layanan extends MY_Controller
             }
 
 
-            //Tabel Data Segel Tas ------------------------------------------------------------------------------------------------------------
+    //Tabel Data Segel Tas ------------------------------------------------------------------------------------------------------------
         } else if ($layanan == 'data_segel_tas') {
 
             if (isset($_FILES["fileExcel"]["name"])) {
@@ -140,8 +130,9 @@ class Layanan extends MY_Controller
                             'user' => $this->session->userdata("user_login")['username']
 
                         );
+                        //delete data
+                        // $this->db->query("DELETE FROM Div_Layanan.data_segel_tas WHERE ");
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
@@ -158,7 +149,6 @@ class Layanan extends MY_Controller
             } else {
                 echo "Tidak ada file yang masuk";
             }
-
 
             //Tabel Kendaraan ------------------------------------------------------------------------------------------------------------
         } else if ($layanan == 'kendaraan') {
@@ -187,19 +177,16 @@ class Layanan extends MY_Controller
                         $Vendor = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
                         $Awal_sewa = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
                         $Akhir_sewa = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-                        // $stnk = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
                         $stnk_row = $worksheet->getCellByColumnAndRow(17, $row);
                         $stnk = $stnk_row->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($stnk_row)) {
                              $stnk = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($stnk)); 
                         }
-                        // $tnbk = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
                         $tnbk_row = $worksheet->getCellByColumnAndRow(18, $row);
                         $tnbk = $tnbk_row->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($tnbk_row)) {
                              $tnbk = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tnbk)); 
                         }
-                        // $Masa_kir = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
                         $Masa_kir_row = $worksheet->getCellByColumnAndRow(19, $row);
                         $Masa_kir = $Masa_kir_row->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($Masa_kir_row)) {
@@ -208,7 +195,6 @@ class Layanan extends MY_Controller
                         $safety_box = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
                         $jenis_kend = $worksheet->getCellByColumnAndRow(21, $row)->getValue();
                         $keterangan = $worksheet->getCellByColumnAndRow(22, $row)->getValue();
-
 
                         $temp_data[] = array(
                             'Kode'    => $Kode,
@@ -237,12 +223,13 @@ class Layanan extends MY_Controller
                             'user' => $this->session->userdata("user_login")['username']
 
                         );
+                        //delete data
+                        $this->db->query("DELETE FROM Div_Layanan.kendaraan WHERE Kendaraan_TNBK = '".$Kendaraan_TNBK."'"); 
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
+                //insert data
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
-                // lastq();
                 if ($insert) {
                     if ($layanan) {
                         $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
@@ -256,7 +243,7 @@ class Layanan extends MY_Controller
                 echo "Tidak ada file yang masuk";
             }
 
-            //Tabel Data Kas ------------------------------------------------------------------------------------------------------------
+    //Tabel Data Kas ------------------------------------------------------------------------------------------------------------
         } else if ($layanan == 'tbl_data_kas') {
 
             if (isset($_FILES["fileExcel"]["name"])) {
@@ -269,7 +256,7 @@ class Layanan extends MY_Controller
                         $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
                         $kantor_cabang = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         $tk_replenish = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                        $__return = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $return = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                         $atm_replenish = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                         $average_tk = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                         $average_return = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
@@ -280,7 +267,7 @@ class Layanan extends MY_Controller
                             'no'    => $no,
                             'kantor_cabang'    => $kantor_cabang,
                             'tk_replenish'    => $tk_replenish,
-                            '__return'    => $__return,
+                            'return'    => $return,
                             'atm_replenish'    => $atm_replenish,
                             'average_tk'    => $average_tk,
                             'average_return'    => $average_return,
@@ -288,10 +275,12 @@ class Layanan extends MY_Controller
                           'user' => $this->session->userdata("user_login")['username']
 
                         );
+                        //delete data
+                        $this->db->query("DELETE FROM Div_Layanan.tbl_data_kas WHERE kantor_cabang = '".$kantor_cabang."'");
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
+                //insert data
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
                 // lastq();
                 if ($insert) {
@@ -306,9 +295,8 @@ class Layanan extends MY_Controller
             } else {
                 echo "Tidak ada file yang masuk";
             }
-        
 
-        //Tabel Master Kas ------------------------------------------------------------------------------------------------------------
+    //Tabel Master Kas ------------------------------------------------------------------------------------------------------------
         } else if ($layanan == 'tbl_masterkas'){
             // cetak_die($layanan);
             if (isset($_FILES["fileExcel"]["name"])) {
@@ -319,12 +307,14 @@ class Layanan extends MY_Controller
                     $highestColumn = $worksheet->getHighestColumn();
                     for ($row = 2; $row <= $highestRow; $row++) {
                         $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-                        // $tanggal = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                        $tanggal_row = $worksheet->getCellByColumnAndRow(1, $row);
-                        $tanggal = $tanggal_row->getValue();
-                        if(PHPExcel_Shared_Date::isDateTime($tanggal_row)) {
-                             $tanggal = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tanggal)); 
-                        }
+
+                        $tanggal = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        // $Tanggal_kas = $worksheet->getCellByColumnAndRow(1, $row);
+                        // $tgl = $Tanggal_kas->getValue();
+                        // if(PHPExcel_Shared_Date::isDateTime($Tanggal_kas)) {
+                        //      $tgl = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tgl)); 
+                        // }
+                        
                         $codebranch = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                         $saldo_awal_bri = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
                         $uang_layak = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
@@ -340,9 +330,7 @@ class Layanan extends MY_Controller
                         $atm_replenish = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
                         $sub_total_pengurangan = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
                         $saldo_akhir = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-                        $cabang = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
-                        // $total_saldo_awal_penambahan = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-                        
+                        $cabang = $worksheet->getCellByColumnAndRow(17, $row)->getValue();                        
 
                         $temp_data[] = array(
                             'no'    => $no,
@@ -363,16 +351,16 @@ class Layanan extends MY_Controller
                             'sub_total_pengurangan'    => $sub_total_pengurangan,
                             'saldo_akhir'    => $saldo_akhir,
                             'cabang'    => $cabang,
-                            // 'total_saldo_awal_penambahan'    => $total_saldo_awal_penambahan,
                             'user' => $this->session->userdata("user_login")['username']
 
                         );
+                        // delete data
+                        // $this->db->  query("DELETE FROM Div_Layanan.tbl_masterkas WHERE no = '" . $no . "'");
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
+                //insert data
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
-                // lastq();
                 if ($insert) {
                     if ($layanan) {
                         $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
@@ -410,13 +398,7 @@ class Layanan extends MY_Controller
                         $aktivitas_mesin = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
                         $kepemilikan = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
                         $kondisi = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                        $keterangan = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-                        // $atm_replenish = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-                        // $sub_total_pengurangan = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
-                        // $saldo_akhir = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-                        // $cabang = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
-                        // $total_saldo_awal_penambahan = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-                        
+                        $keterangan = $worksheet->getCellByColumnAndRow(13, $row)->getValue();                        
 
                         $temp_data[] = array(
                             'kode'    => $kode,
@@ -433,20 +415,16 @@ class Layanan extends MY_Controller
                             'kepemilikan'    => $kepemilikan,
                             'kondisi'    => $kondisi,
                             'keterangan'    => $keterangan,
-                            // 'atm_replenish'    => $atm_replenish,
-                            // 'sub_total_pengurangan'    => $sub_total_pengurangan,
-                            // 'saldo_akhir'    => $saldo_akhir,
-                            // 'cabang'    => $cabang,
-                            // // 'total_saldo_awal_penambahan'    => $total_saldo_awal_penambahan,
                             'user' => $this->session->userdata("user_login")['username']
 
                         );
+                        //delete data
+                        $this->db->query("DELETE FROM Div_Layanan.tbl_mhu_dan_msu WHERE serial_number = '".$serial_number."'"); 
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
+                //insert data
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
-                // lastq();
                 if ($insert) {
                     if ($layanan) {
                         $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
@@ -472,8 +450,6 @@ class Layanan extends MY_Controller
                     $highestColumn = $worksheet->getHighestColumn();
                     for ($row = 2; $row <= $highestRow; $row++) {
                         $No = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-                        // $Tgl_Selisih = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                        //untuk convert tanggal excel to db
                         $Tgl_Selisih_raw = $worksheet->getCellByColumnAndRow(1, $row);
                         $tgl_selisih_final = $Tgl_Selisih_raw->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($Tgl_Selisih_raw)) {
@@ -487,7 +463,6 @@ class Layanan extends MY_Controller
                         $Denom = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
                         $Supervisi = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
                         $Shortage = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-                        // $Tgl_Instruksi = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
                         $tgl_intruksi_row = $worksheet->getCellByColumnAndRow(10, $row);
                         $tgl_intruksi = $tgl_intruksi_row->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($tgl_intruksi_row)) {
@@ -496,7 +471,6 @@ class Layanan extends MY_Controller
                         $Surat_Investigasi = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
                         $PIC_Investigasi = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
                         $Keterangan_H3 = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-                        // $Reminder_H3 = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
                         $reminder_row = $worksheet->getCellByColumnAndRow(14, $row);
                         $Reminder_H3 = $reminder_row->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($reminder_row)) {
@@ -508,10 +482,6 @@ class Layanan extends MY_Controller
                         $Open = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
                         $Close = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
                         $Case_ID = $worksheet->getCellByColumnAndRow(21, $row)->getValue();
-                        // $total_saldo_awal_penambahan = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-                        // $total_saldo_awal_penambahan = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-
-                        
 
                         $temp_data[] = array(
                             'No'    => $No,
@@ -535,12 +505,12 @@ class Layanan extends MY_Controller
                             'Open'    => $Open,
                             'Close'    => $Close,
                             'Case_ID'    => $Case_ID,
-                            // 'total_saldo_awal_penambahan'    => $total_saldo_awal_penambahan,
                             'user' => $this->session->userdata("user_login")['username']
 
                         );
+                        // delete data
+                        $this->db->query("DELETE FROM Div_Layanan.tbl_rekap_shortage WHERE TID = '".$TID."'");
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
@@ -558,8 +528,7 @@ class Layanan extends MY_Controller
                 echo "Tidak ada file yang masuk";
             }
 
-
-            //Tabel Rekap Bank BJB ------------------------------------------------------------------------------------------------------------
+        //Tabel Rekap Bank BJB ------------------------------------------------------------------------------------------------------------
         } else if ($layanan == 'rekap_bank_bjb'){
             // cetak_die($layanan);
             if (isset($_FILES["fileExcel"]["name"])) {
@@ -573,15 +542,11 @@ class Layanan extends MY_Controller
                         $cabang = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         $id_atm = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                         $lokasi_atm = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-
-                        //untuk convert tanggal excel to db
                         $tanggal_efektif = $worksheet->getCellByColumnAndRow(4, $row);
                         $tgl_efektif_final = $tanggal_efektif->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($tanggal_efektif)) {
                              $tgl_efektif_final = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tgl_efektif_final)); 
                         }
-
-
                         $jam_pengisian = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                         $denom = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
                         $nominal_pengisian = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
@@ -600,8 +565,9 @@ class Layanan extends MY_Controller
                             'user'              => $this->session->userdata("user_login")['username']
 
                         );
+                        //delete data
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_bank_bjb WHERE "); 
                     }
-                    // cetak_die($temp_data);
                 }
                 // $this->load->model('ImportModel');
                 $insert = $this->layanan->insert_batch($layanan, $temp_data);
@@ -659,6 +625,9 @@ class Layanan extends MY_Controller
                             'user'          => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_cr_bank_bjb WHERE ID_ATM = '" . $ID_ATM . "'");
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -714,6 +683,10 @@ class Layanan extends MY_Controller
                             'user'                => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_flm_bank_bjb WHERE ID_ATM = '" . $ID_ATM . "'");
+                        // lastq();
+
                     }
                     // cetak_die($temp_data);
                 }
@@ -793,6 +766,9 @@ class Layanan extends MY_Controller
                             'user'                  => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_biaya_cr_flm_bank_bjb WHERE ID = '" . $ID . "'");
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -841,6 +817,9 @@ class Layanan extends MY_Controller
                             'user'                       => $this->session->userdata("user_login")['username']
 
                         );
+
+                        // $this->db->query("DELETE FROM Div_Layanan.harga_kegiatan_bank_bjb WHERE );
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -913,6 +892,9 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_analisa_kc_non_cro_cit WHERE Nama_Kanca = '" . $Nama_Kanca . "'");
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -985,6 +967,9 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_analisa_kc_total WHERE Nama_Kanca = '" . $Nama_Kanca . "'");
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -1045,6 +1030,9 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_analisa_problem_kc_selindo WHERE KANTOR_CABANG = '" . $KANTOR_CABANG . "'");
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -1103,6 +1091,9 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_flm_bg_selindo WHERE KANTOR_LAYANAN = '" . $KANTOR_LAYANAN . "'");
+                        // lastq();
                     }
                     // cetak_die($temp_data);
                 }
@@ -1183,6 +1174,8 @@ class Layanan extends MY_Controller
                             'user'                                      => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_kinerja_kc_cit WHERE Nama_Kanca = '" . $Nama_Kanca . "'");
                     }
                     // cetak_die($temp_data);
                 }
@@ -1263,6 +1256,8 @@ class Layanan extends MY_Controller
                             'user'                                      => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_kinerja_kc_cro WHERE Nama_Kanca = '" . $Nama_Kanca . "'");
                     }
                     // cetak_die($temp_data);
                 }
@@ -1320,6 +1315,8 @@ class Layanan extends MY_Controller
                             'user'                               => $this->session->userdata("user_login")['username']
 
                         );
+
+                        // $this->db->query("DELETE FROM Div_Layanan.rekap_persedian_log_kc WHERE pn = '" . $pn . "'");
                     }
                     // cetak_die($temp_data);
                 }
@@ -1385,6 +1382,8 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_rpl_bg_selindo WHERE KANTOR_LAYANAN = '" . $KANTOR_LAYANAN . "'");
                     }
                     // cetak_die($temp_data);
                 }
@@ -1455,6 +1454,8 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekon_atm_bank_bjb WHERE BJB = '" . $BJB . "'");
                     }
                     // cetak_die($temp_data);
                 }
@@ -1502,7 +1503,7 @@ class Layanan extends MY_Controller
                         $NAMA_ATM1 = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
                         $PROBLEM1 = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
                         // $TANGGAL1 = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                        $TANGGAL1_row = $worksheet->getCellByColumnAndRow(5, $row);
+                        $TANGGAL1_row = $worksheet->getCellByColumnAndRow(12, $row);
                         $TANGGAL1 = $TANGGAL1_row->getValue();
                         if(PHPExcel_Shared_Date::isDateTime($TANGGAL1_row)) {
                              $TANGGAL1 = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($TANGGAL1)); 
@@ -1531,6 +1532,8 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekon_flm_bank_bjb WHERE ID_ATM = '" . $ID_ATM . "'");
                     }
                     // cetak_die($temp_data);
                 }
@@ -1551,7 +1554,7 @@ class Layanan extends MY_Controller
             }
 
 //Tabel Data SM ---------------------------------------------------------------------------------------------------------------
-        }else if ($layanan == 'data_sm'){
+        } else if ($layanan == 'data_sm'){
             // cetak_die($layanan);
             if (isset($_FILES["fileExcel"]["name"])) {
                 $path = $_FILES["fileExcel"]["tmp_name"];
@@ -1592,6 +1595,9 @@ class Layanan extends MY_Controller
                             'user'                   => $this->session->userdata("user_login")['username']
 
                         );
+
+                        $this->db->query("DELETE FROM Div_Layanan.data_sm WHERE TID = '" . $TID . "'");
+
                     }
                     // cetak_die($temp_data);
                 }
@@ -1606,6 +1612,781 @@ class Layanan extends MY_Controller
                 } else {
                     $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
                     redirect('Datasm');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+//Tabel Reliability Harian BG ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'reliability_harian_bg'){
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kantor_Layanan = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Jam_Capture_0 = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Jam_Capture_3 = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Jam_Capture_6 = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $Jam_Capture_9 = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Jam_Capture_12 = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Jam_Capture_15 = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $Jam_Capture_18 = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $Jam_Capture_21 = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $Average = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                     => $no,
+                            'Kantor_Layanan'         => $Kantor_Layanan,
+                            'Jam_Capture_0'          => $Jam_Capture_0,
+                            'Jam_Capture_3'          => $Jam_Capture_3,
+                            'Jam_Capture_6'          => $Jam_Capture_6,
+                            'Jam_Capture_9'          => $Jam_Capture_9,
+                            'Jam_Capture_12'         => $Jam_Capture_12,
+                            'Jam_Capture_15'         => $Jam_Capture_15,
+                            'Jam_Capture_18'         => $Jam_Capture_18,
+                            'Jam_Capture_21'         => $Jam_Capture_21,
+                            'Average'                => $Average,
+                            'user'                   => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.reliability_harian_bg WHERE Kantor_Layanan = '" . $Kantor_Layanan . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('ReliabilityHarianBG');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('ReliabilityHarianBG');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Rekap Presentase Return RPL KL Selindo ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'rekap_presentase_return_rpl_kl_selindo') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kantor_Layanan = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Tgl_1 = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Tgl_2 = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Tgl_3 = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $Tgl_4 = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Tgl_5 = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Tgl_6 = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $Tgl_7 = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $Tgl_8 = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $Tgl_9 = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $Tgl_10 = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                        $Tgl_11 = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                        $Tgl_12 = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                        $Tgl_13 = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+                        $Tgl_14 = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+                        $Tgl_15 = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+                        $Tgl_16 = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+                        $Tgl_17 = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+                        $Tgl_18 = $worksheet->getCellByColumnAndRow(19, $row)->getValue();
+                        $Tgl_19 = $worksheet->getCellByColumnAndRow(20, $row)->getValue();
+                        $Tgl_20 = $worksheet->getCellByColumnAndRow(21, $row)->getValue();
+                        $Tgl_21 = $worksheet->getCellByColumnAndRow(22, $row)->getValue();
+                        $Tgl_22 = $worksheet->getCellByColumnAndRow(23, $row)->getValue();
+                        $Tgl_23 = $worksheet->getCellByColumnAndRow(24, $row)->getValue();
+                        $Tgl_24 = $worksheet->getCellByColumnAndRow(25, $row)->getValue();
+                        $Tgl_25 = $worksheet->getCellByColumnAndRow(26, $row)->getValue();
+                        $Tgl_26 = $worksheet->getCellByColumnAndRow(27, $row)->getValue();
+                        $Tgl_27 = $worksheet->getCellByColumnAndRow(28, $row)->getValue();
+                        $Tgl_28 = $worksheet->getCellByColumnAndRow(29, $row)->getValue();
+                        $Tgl_29 = $worksheet->getCellByColumnAndRow(30, $row)->getValue();
+                        $Tgl_30 = $worksheet->getCellByColumnAndRow(31, $row)->getValue();
+                        $Tgl_31 = $worksheet->getCellByColumnAndRow(32, $row)->getValue();
+                        $Average = $worksheet->getCellByColumnAndRow(33, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'             => $no,
+                            'Kantor_Layanan' => $Kantor_Layanan,
+                            'Tgl_1'          => $Tgl_1,
+                            'Tgl_2'          => $Tgl_2,
+                            'Tgl_3'          => $Tgl_3,
+                            'Tgl_4'          => $Tgl_4,
+                            'Tgl_5'          => $Tgl_5,
+                            'Tgl_6'          => $Tgl_6,
+                            'Tgl_7'          => $Tgl_7,
+                            'Tgl_8'          => $Tgl_8,
+                            'Tgl_9'          => $Tgl_9,
+                            'Tgl_10'          => $Tgl_10,
+                            'Tgl_11'          => $Tgl_11,
+                            'Tgl_12'          => $Tgl_12,
+                            'Tgl_13'          => $Tgl_13,
+                            'Tgl_14'          => $Tgl_14,
+                            'Tgl_15'          => $Tgl_15,
+                            'Tgl_16'          => $Tgl_16,
+                            'Tgl_17'          => $Tgl_17,
+                            'Tgl_18'          => $Tgl_18,
+                            'Tgl_19'          => $Tgl_19,
+                            'Tgl_20'          => $Tgl_20,
+                            'Tgl_21'          => $Tgl_21,
+                            'Tgl_22'          => $Tgl_22,
+                            'Tgl_23'          => $Tgl_23,
+                            'Tgl_24'          => $Tgl_24,
+                            'Tgl_25'          => $Tgl_25,
+                            'Tgl_26'          => $Tgl_26,
+                            'Tgl_27'          => $Tgl_27,
+                            'Tgl_28'          => $Tgl_28,
+                            'Tgl_29'          => $Tgl_29,
+                            'Tgl_30'          => $Tgl_30,
+                            'Tgl_31'          => $Tgl_31,
+                            'Average'         => $Average,
+                            'user'            => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.rekap_presentase_return_rpl_kl_selindo WHERE Kantor_Layanan = '" . $Kantor_Layanan . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('RekapPresentaseReturnRPL');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('RekapPresentaseReturnRPL');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Data Laporan vaksin ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'tb_vaksin') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $pn = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $nama = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $jabatan = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $divisi = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $bagian = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+
+                        // $Tanggal_Vaksin_Vaksin_I = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $vaksin_1 = $worksheet->getCellByColumnAndRow(6, $row);
+                        $tgl_vaksin_1 = $vaksin_1->getValue();
+                        if(PHPExcel_Shared_Date::isDateTime($vaksin_1)) {
+                             $tgl_vaksin_1 = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tgl_vaksin_1)); 
+                        }
+
+                        // $Tanggal_Vaksin_Vaksin_II = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $vaksin_2 = $worksheet->getCellByColumnAndRow(7, $row);
+                        $tgl_vaksin_2 = $vaksin_2->getValue();
+                        if(PHPExcel_Shared_Date::isDateTime($vaksin_2)) {
+                             $tgl_vaksin_2 = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tgl_vaksin_2)); 
+                        }
+
+                        $lokasi = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $keterangan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $status = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $cek_vaksin_1 = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                        $cek_vaksin_2 = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                        $cek_tidak_layak = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                        $cek_terjadwal = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                         => $no,
+                            'pn'                     => $pn,
+                            'nama'                => $nama,
+                            'jabatan'                       => $jabatan,
+                            'divisi'                    => $divisi,
+                            'bagian'          => $bagian,
+                            'vaksin_1'      => $tgl_vaksin_1,
+                            'vaksin_2'      => $tgl_vaksin_2,
+                            'lokasi'        => $lokasi,
+                            'keterangan'              => $keterangan,
+                            'status'                 => $status,
+                            'cek_vaksin_1'                 => $cek_vaksin_1,
+                            'cek_vaksin_2'                 => $cek_vaksin_2,
+                            'cek_tidak_layak'                 => $cek_tidak_layak,
+                            'cek_terjadwal'                 => $cek_terjadwal,
+                            'user'                       => $this->session->userdata("user_login")['username']
+
+                        );
+                        $this->db->query("DELETE FROM Div_Layanan.tb_vaksin WHERE pn = '".$pn."'");                    }
+                    // lastq();
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('DataVaksin');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('DataVaksin');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Data Vaksin Sudah vaksin ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'data_vaksin_div_layanan_sudah_vaksin') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $ID_Personal = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Nama = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Jabatan = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Unit_Kerja = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+
+                        // $Tanggal_Vaksin_Vaksin_I = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Tanggal_Vaksin_Vaksin_I = $worksheet->getCellByColumnAndRow(5, $row);
+                        $tgl_Vaksin_1 = $Tanggal_Vaksin_Vaksin_I->getValue();
+                        if(PHPExcel_Shared_Date::isDateTime($Tanggal_Vaksin_Vaksin_I)) {
+                             $tgl_Vaksin_1 = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tgl_Vaksin_1)); 
+                        }
+
+                        // $Tanggal_Vaksin_Vaksin_II = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Tanggal_Vaksin_Vaksin_II = $worksheet->getCellByColumnAndRow(6, $row);
+                        $tgl_Vaksin_2 = $Tanggal_Vaksin_Vaksin_II->getValue();
+                        if(PHPExcel_Shared_Date::isDateTime($Tanggal_Vaksin_Vaksin_II)) {
+                             $tgl_Vaksin_2 = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($tgl_Vaksin_2)); 
+                        }
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                         => $no,
+                            'ID_Personal'                => $ID_Personal,
+                            'Nama'                       => $Nama,
+                            'Jabatan'                    => $Jabatan,
+                            'Unit_Kerja'                 => $Unit_Kerja,
+                            'Tanggal_Vaksin_Vaksin_I'    => $tgl_Vaksin_1,
+                            'Tanggal_Vaksin_Vaksin_II'   => $tgl_Vaksin_2,
+                            'user'                       => $this->session->userdata("user_login")['username']
+
+                        );
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('DataVaksinSudahVaksin');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('DataVaksinSudahVaksin');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Closed Case Shortage Januari-Oktober ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Closed_Case_shortage_Januari_Oktober_berdasarkan_kategori_kasus') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kategori_Kasus = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Frekuensi = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Nominal = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Freq = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $Nom = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                => $no,
+                            'Kategori_Kasus'    => $Kategori_Kasus,
+                            'Frekuensi'         => $Frekuensi,
+                            'Nominal'           => $Nominal,
+                            'Freq'              => $Freq,
+                            'Nom'               => $Nom,
+                            'user'              => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Closed_Case_shortage_Januari_Oktober_berdasarkan_kategori_kasus WHERE Kategori_Kasus = '" . $Kategori_Kasus . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('ClosedCaseShortageJanuariOktober');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('ClosedCaseShortageJanuariOktober');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Closed Case Shortage September ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Closed_Case_shortage_September_berdasarkan_kategori_kasus') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kategori_Kasus = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Frekuensi = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Nominal = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Freq = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $Nom = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                => $no,
+                            'Kategori_Kasus'    => $Kategori_Kasus,
+                            'Frekuensi'         => $Frekuensi,
+                            'Nominal'           => $Nominal,
+                            'Freq'              => $Freq,
+                            'Nom'               => $Nom,
+                            'user'              => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Closed_Case_shortage_September_berdasarkan_kategori_kasus WHERE Kategori_Kasus = '" . $Kategori_Kasus . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('ClosedCaseShortageSeptember');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('ClosedCaseShortageSeptember');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Update Kategori Kasus Closed Case Frekuensi ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Update_Kategori_kasus_Closed_Case_Frekuensi') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Frekuensi_Periode = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Kategori_Anomali_Cardless = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Balancing_Tidak_Tertib_RPL = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Cocok_Surplus_berdasarkan_Rekon_EJ_Trx = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $CPC_Tidak_Tertib = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Indikasi_Fraud = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Kesalahan_Rekon_Membaca_Billcounter = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $Vandalisme = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $Open = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $Grand_Total = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                                        => $no,
+                            'Frekuensi_Periode'                         => $Frekuensi_Periode,
+                            'Kategori_Anomali_Cardless'                 => $Kategori_Anomali_Cardless,
+                            'Balancing_Tidak_Tertib_RPL'                => $Balancing_Tidak_Tertib_RPL,
+                            'Cocok_Surplus_berdasarkan_Rekon_EJ_Trx'    => $Cocok_Surplus_berdasarkan_Rekon_EJ_Trx,
+                            'CPC_Tidak_Tertib'                          => $CPC_Tidak_Tertib,
+                            'Indikasi_Fraud'                            => $Indikasi_Fraud,
+                            'Kesalahan_Rekon_Membaca_Billcounter'       => $Kesalahan_Rekon_Membaca_Billcounter,
+                            'Vandalisme'                                => $Vandalisme,
+                            'Open'                                      => $Open,
+                            'Grand_Total'                               => $Grand_Total,
+                            'user'                              => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Update_Kategori_kasus_Closed_Case_Frekuensi WHERE Frekuensi_Periode = '" . $Frekuensi_Periode . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('UpdateKategoriKasusClosedCaseFrekuensi');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('UpdateKategoriKasusClosedCaseFrekuensi');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Update Kategori Kasus Closed Case Nominal ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Update_Kategori_kasus_Closed_Case_Nominal') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Nominal_Periode = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Kategori_Anomali_Cardless = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Balancing_Tidak_Tertib_RPL = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Cocok_Surplus_berdasarkan_Rekon_EJ_Trx = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $CPC_Tidak_Tertib = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Indikasi_Fraud = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Kesalahan_Rekon_Membaca_Billcounter = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $Vandalisme = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $Open = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $Grand_Total = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                                        => $no,
+                            'Nominal_Periode'                           => $Nominal_Periode,
+                            'Kategori_Anomali_Cardless'                 => $Kategori_Anomali_Cardless,
+                            'Balancing_Tidak_Tertib_RPL'                => $Balancing_Tidak_Tertib_RPL,
+                            'Cocok_Surplus_berdasarkan_Rekon_EJ_Trx'    => $Cocok_Surplus_berdasarkan_Rekon_EJ_Trx,
+                            'CPC_Tidak_Tertib'                          => $CPC_Tidak_Tertib,
+                            'Indikasi_Fraud'                            => $Indikasi_Fraud,
+                            'Kesalahan_Rekon_Membaca_Billcounter'       => $Kesalahan_Rekon_Membaca_Billcounter,
+                            'Vandalisme'                                => $Vandalisme,
+                            'Open'                                      => $Open,
+                            'Grand_Total'                               => $Grand_Total,
+                            'user'                              => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Update_Kategori_kasus_Closed_Case_Nominal WHERE Nominal_Periode = '" . $Nominal_Periode . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('UpdateKategoriKasusClosedCaseNominal');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('UpdateKategoriKasusClosedCaseNominal');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Monitoring Instruksi Investigasi Shortage BG Selindo ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Monitoring_Instruksi_Investigasi_Shortage_BG_Selindo') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kantor_Cabang = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Frekuensi = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Nominal = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Frekuensi_Kasus_New = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $Frekuensi_Kasus_Open = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Frekuensi_Kasus_Close = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Frekuensi_Kasus_∑ = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $Closed_Case_Done = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $Closed_Case_Progress = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $Pending = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $Periode = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                      => $no,
+                            'Kantor_Cabang'           => $Kantor_Cabang,
+                            'Frekuensi'               => $Frekuensi,
+                            'Nominal'                 => $Nominal,
+                            'Frekuensi_Kasus_New'     => $Frekuensi_Kasus_New,
+                            'Frekuensi_Kasus_Open'    => $Frekuensi_Kasus_Open,
+                            'Frekuensi_Kasus_Close'   => $Frekuensi_Kasus_Close,
+                            'Frekuensi_Kasus_∑'       => $Frekuensi_Kasus_∑,
+                            'Closed_Case_Done'        => $Closed_Case_Done,
+                            'Closed_Case_Progress'    => $Closed_Case_Progress,
+                            'Pending'                 => $Pending,
+                            'Periode'                 => $Periode,
+                            'user'                    => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Monitoring_Instruksi_Investigasi_Shortage_BG_Selindo WHERE Kantor_Cabang = '" . $Kantor_Cabang . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('MonitoringInstruksiInvestigasiShortageBGSelindo');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('MonitoringInstruksiInvestigasiShortageBGSelindo');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Monitoring Outstanding Shortage BG Selindo ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Monitoring_Outstanding_Shortage_BG_Selindo') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kantor_Cabang = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Frekuensi = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Nominal = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $Frekuensi_Kasus_New = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $Frekuensi_Kasus_Open = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $Frekuensi_Kasus_Close = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $Frekuensi_Kasus = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $Progress_Mingguan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $Closed_Case_Done = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $Closed_Case_Progress = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $Pending_Jan_Sept = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                        $Pending_Oktober = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                        $All_Pending = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                      => $no,
+                            'Kantor_Cabang'           => $Kantor_Cabang,
+                            'Frekuensi'               => $Frekuensi,
+                            'Nominal'                 => $Nominal,
+                            'Frekuensi_Kasus_New'     => $Frekuensi_Kasus_New,
+                            'Frekuensi_Kasus_Open'    => $Frekuensi_Kasus_Open,
+                            'Frekuensi_Kasus_Close'   => $Frekuensi_Kasus_Close,
+                            'Frekuensi_Kasus'         => $Frekuensi_Kasus,
+                            'Progress_Mingguan'       => $Progress_Mingguan,
+                            'Closed_Case_Done'        => $Closed_Case_Done,
+                            'Closed_Case_Progress'    => $Closed_Case_Progress,
+                            'Pending_Jan_Sept'        => $Pending_Jan_Sept,
+                            'Pending_Oktober'         => $Pending_Oktober,
+                            'All_Pending'             => $All_Pending,
+                            'user'                    => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Monitoring_Outstanding_Shortage_BG_Selindo WHERE Kantor_Cabang = '" . $Kantor_Cabang . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('MonitoringOutstandingShortageBGSelindo');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('MonitoringOutstandingShortageBGSelindo');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+//Tabel Grafik Progress & Pending Case Cabang ---------------------------------------------------------------------------------------------------------------
+
+        } else if ($layanan == 'Grafik_Progress_dan_Pending_CaseCabang') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $Kantor_Cabang = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $Progress_Minggu_3 = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $Pending = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                      => $no,
+                            'Kantor_Cabang'           => $Kantor_Cabang,
+                            'Progress_Minggu_3'       => $Progress_Minggu_3,
+                            'Pending'                 => $Pending,
+                            'user'                    => $this->session->userdata("user_login")['username']
+
+                        );
+
+                        $this->db->query("DELETE FROM Div_Layanan.Grafik_Progress_dan_Pending_CaseCabang WHERE Kantor_Cabang = '" . $Kantor_Cabang . "'");
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('GrafikProgressdanPendingCaseCabang');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('GrafikProgressdanPendingCaseCabang');
+                }
+            } else {
+                echo "Tidak ada file yang masuk";
+            }
+
+
+
+    //Tabel Data Vaksin ---------------------------------------------------------------------------------------------------------------
+
+
+        } else if ($layanan == 'tb_vaksin') {
+            // cetak_die($layanan);
+            if (isset($_FILES["fileExcel"]["name"])) {
+                $path = $_FILES["fileExcel"]["tmp_name"];
+                $object = PHPExcel_IOFactory::load($path);
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $no = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $pn = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $nama = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $jabatan = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $divisi = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $bagian = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $vaksin_1 = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $vaksin_2 = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $lokasi = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $keterangan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $status = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $cek_vaksin_1 = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                        $cek_vaksin_2 = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                        $cek_tidak_layak = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                        $cek_terjadwal = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+
+                                                                                                                        
+                        $temp_data[] = array(
+                            'no'                      => $no,
+                            'pn'           => $pn,
+                            'nama'       => $nama,
+                            'jabatan'                 => $jabatan,
+                            'divisi'           => $divisi,
+                            'bagian'           => $bagian,
+                            'vaksin_1'           => $vaksin_1,
+                            'vaksin_2'           => $vaksin_2,
+                            'lokasi'           => $lokasi,
+                            'keterangan'           => $keterangan,
+                            'status'           => $status,
+                            'cek_vaksin_1'           => $cek_vaksin_1,
+                            'cek_vaksin_2'           => $cek_vaksin_2,
+                            'cek_tidak_layak'           => $cek_tidak_layak,
+                            'cek_terjadwal'           => $cek_terjadwal,
+                            'user'                    => $this->session->userdata("user_login")['username']
+
+                        );
+
+
+                        $this->db->query("DELETE FROM Div_Layanan.tb_vaksin WHERE pn = '" . $pn . "'");
+                        // lastq();
+
+                    }
+                    // cetak_die($temp_data);
+                }
+                // $this->load->model('ImportModel');
+                $insert = $this->layanan->insert_batch($layanan, $temp_data);
+                // lastq();
+                if ($insert) {
+                    // if ($layanan) {
+                        $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Berhasil');
+                        redirect('DataVaksin');
+                    // }
+                } else {
+                    $this->session->set_flashdata('status', '<span class="glyphicon glyphicon-remove"></span> Terjadi Kesalahan');
+                    redirect('DataVaksin');
                 }
             } else {
                 echo "Tidak ada file yang masuk";

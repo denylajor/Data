@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BRICASH-Inventory | <?= $title ?></title>
+    <title>MillGrafana-Upload Excel | <?= $title ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -31,14 +31,32 @@
     <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/toastr.js"> </script>
 
+
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue">
+
+
+<style>
+
+.main-sidebar {
+    background-color: #013a63;
+    color: white;
+}
+
+.sidebar-menu .header {
+    
+}
+
+
+</style>
+
+
+<body class="hold-transition" style="background-color: #012a4a;">
     <div class="wrapper">
         <header class="main-header">
-            <a href="<?= base_url() ?>dashboard" class="logo">
+            <a href="<?= base_url() ?>dashboard" class="logo" style="color: white; background-color: #012a4a;">
                 <span class="logo-mini"><b>K</b>UMS</span>
                 <span class="logo-lg">
                     <b><?= $title; ?>
@@ -127,11 +145,11 @@
                     </div>
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="header" style="background-color: #012a4a; text-align: center; color: white;">MAIN NAVIGATION</li>
                     <?php foreach ($parent_nav as $prow) : ?>
                         <li class="<?= $prow->url_menu == "#" ? "treeview" : base_url($prow->url_menu) ?> <?= $prow->nama_menu == $this->session->userdata('parent_name') ? 'active menu-open' : '' ?>">
-                            <a href="<?= $prow->url_menu == "#" ? "javascript:;" : base_url($prow->url_menu) ?>" class="nav-link nav-toggle">
-                                <i class="fa fa-folder"></i>
+                            <a href="<?= $prow->url_menu == "#" ? "javascript:;" : base_url($prow->url_menu) ?>" class="nav-link nav-toggle" style="background-color: #012a4a; color: #fff;">
+                                <i class="fa fa-folder" style="color: #ff6d00;"></i>
                                 <span class="title"><?= $prow->nama_menu; ?></span>
                                 <?php if ($prow->url_menu == "#") { ?>
                                     <span class="pull-right-container">
@@ -139,7 +157,7 @@
                                     </span>
                                 <?php } ?>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu" style="background-color: #012a4a; background-color:#012a4a; ">
                                 <?php $child_menus = $My_Controller->fetchsidebar_childMenuById($prow->id_menu); ?>
                                 <?php foreach ($child_menus as $child_menuss => $val) { ?>
                                     <?php if ($prow->id_menu == $val->parent_id) { ?>
@@ -156,21 +174,21 @@
                 </ul>
             </section>
         </aside>
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color: #013a63;">
             <section class="content-header">
                 <?php $My_Controller->Getsave_up_delPermissions(); ?>
                 <h1><small></small></h1>
-                <ol class="breadcrumb">
+                <ol class="breadcrumb" style="color: white;">
                     <li>
                         <a href="<?= base_url(); ?>dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                     </li>
                     <?php if ($this->session->userdata('child_name')) { ?>
                         <li>
                             <?= $this->session->userdata('parent_name'); ?>
-                            <i class="fa fa-angle-right"></i>
+                            <!-- <i class="fa fa-angle-right"></i> -->
                         </li>
                         <li>
-                            <a style="color: green; font-weight: bold; font-style: normal" href="<?= $this->session->userdata('child_url'); ?>"><?= $this->session->userdata('child_name'); ?></a><span class="divider-last">&nbsp;</span>
+                            <a style="color: orange; font-weight: bold; font-style: normal" href="<?= $this->session->userdata('child_url'); ?>"><?= $this->session->userdata('child_name'); ?></a><span class="divider-last">&nbsp;</span>
                         </li>
                         <?php } else {
                         if ($this->session->userdata('parent_name')) { ?>

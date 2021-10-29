@@ -23,6 +23,7 @@ class Gpskendaraan extends MY_Controller
 
         // cekPergroup();
         $this->header('Gps Kendaraan');
+        $this->load->helper('url');
         $this->load->view('Layanan/list_gpskendaraan', $data);
         $this->footer();
     }
@@ -35,7 +36,7 @@ class Gpskendaraan extends MY_Controller
             'Div_Layanan.gps_kendaraan',
             ['no', 'CABANG', 'KODE', 'NO_POLISI', 'JENIS_KENDARAAN', 'UKER', 'TAHUN', 'NO_GSM', 'IMEI', 'STATUS_KENDARAAN', 'PEMBAYARAN_GSM', 'Keterangan','user','tanggal_update'],
             ['CABANG', 'KODE', 'NO_POLISI', 'JENIS_KENDARAAN', 'UKER', 'TAHUN', 'NO_GSM', 'IMEI', 'STATUS_KENDARAAN', 'PEMBAYARAN_GSM', 'Keterangan','user','tanggal_update'],
-            ['TAHUN' => 'ASC '],
+            ['tanggal_update' => 'ASC'],
             null,
             'data'
         );

@@ -23,9 +23,9 @@ class Subgroupuser extends MY_Controller
     public function listSubgroupuser()
     {
         $list = $this->Serverside->_serverSide(
-            'tbl_user_subgroup',
-            ['no',  'nama_subgroup', 'is_active'],
-            ['nama_subgroup', 'is_active'],
+            'v_subgroupuser',
+            ['no', 'nama_group', 'nama_subgroup', 'is_active'],
+            ['nama_group', 'nama_subgroup'],
             ['id_subgroup' => 'desc'],
             null,
             'data'
@@ -41,7 +41,7 @@ class Subgroupuser extends MY_Controller
             $row = array();
             $no++;
             $row[] = $no;
-            // $row[] = $results->nama_group;
+            $row[] = $results->nama_group;
             $row[] = $results->nama_subgroup;
             $row[] = statusActiveNonactive($results->is_active);
             $row[] = "<a href='$linkPermession' $buttonDisable data-toggle='modal' class='btn btn-primary'><i class='fa fa-pencil-square-o'></i>
@@ -59,8 +59,8 @@ class Subgroupuser extends MY_Controller
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Serverside->_countAll('tbl_user_subgroup'),
-            "recordsFiltered" => $this->Serverside->_serverSide('tbl_user_subgroup'),
+            "recordsTotal" => $this->Serverside->_countAll('v_subgroupuser'),
+            "recordsFiltered" => $this->Serverside->_serverSide('v_subgroupuser'),
             "data" => $data,
         );
 

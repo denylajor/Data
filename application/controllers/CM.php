@@ -17,10 +17,10 @@ class CM extends MY_Controller
     {
         $data = array(
 
-            'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
+            // 'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
+        // cekPergroup();
         $this->header('Tabel CM');
         $this->load->view('CHM/list_cm', $data);
         $this->footer();
@@ -32,7 +32,7 @@ class CM extends MY_Controller
             'tbl_cm',
             ['no', 'terminal_id', 'sn', 'echannel', 'kanwil', 'kanca', 'lokasi', 'teknisi_vendor', 'no_tiketvendor', 'pet_bri', 'open_tiket_date', 'arrive_date', 'start_working', 'finish_working', 'problem_description', 'user', 'tanggal_update'],
             ['terminal_id', 'sn', 'echannel', 'kanwil', 'kanca', 'lokasi', 'teknisi_vendor', 'no_tiketvendor', 'pet_bri', 'open_tiket_date', 'arrive_date', 'start_working', 'finish_working', 'problem_description', 'user', 'tanggal_update'],
-            ['no' => 'desc'],
+            ['No' => 'ASC'],
             null,
             'data'
         );

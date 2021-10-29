@@ -20,7 +20,7 @@ class Datasm extends MY_Controller
             // 'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
+        // cekPergroup();
         $this->header('Data SM');
         $this->load->view('Layanan/list_datasm', $data);
         $this->footer();

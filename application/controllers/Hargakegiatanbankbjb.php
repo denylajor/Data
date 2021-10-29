@@ -33,9 +33,9 @@ class Hargakegiatanbankbjb extends MY_Controller
         // cetak_die($list);
         $list = $this->Serverside->_serverSide(
             'Div_Layanan.harga_kegiatan_bank_bjb',
-            ['no', 'wilayah', 'kantor_cabang', 'total_atm', 'kegiatan_cr', 'kegiatan_flm', 'total_biaya', 'user', 'tanggal_update', ],
-            ['wilayah', 'kantor_cabang', 'total_atm', 'kegiatan_cr', 'kegiatan_flm', 'total_biaya', 'user', 'tanggal_update', ],
-            ['tanggal_update' => 'ASC '],
+            ['no', 'wilayah', 'kantor_cabang', 'total_atm', 'kegiatan_cr', 'kegiatan_flm', 'total_biaya', 'user', 'tanggal_update'],
+            ['wilayah', 'kantor_cabang', 'total_atm', 'kegiatan_cr', 'kegiatan_flm', 'total_biaya', 'user', 'tanggal_update'],
+            ['tanggal_update' => 'DESC '],
             null,
             'data'
         );

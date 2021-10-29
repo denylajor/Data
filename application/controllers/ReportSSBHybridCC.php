@@ -20,7 +20,7 @@ class ReportSSBHybridCC extends MY_Controller
             'inserttable' => $this->General->fetch_CoustomQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='db_chm'"),
         );
 
-        cekPergroup();
+        // cekPergroup();
         $this->header('Report SSB & Hybrid(CC)');
         $this->load->view('CHM/list_ReportSBBHybridCC', $data);
         $this->footer();

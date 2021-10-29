@@ -127,3 +127,91 @@ $db['db3'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$db['db4'] = array(
+	'dsn'   => '',
+	'hostname' => '172.16.30.2',
+	'username' => 'bck_cro', //username database kedua
+	'password' => '!paste_b1n', //password database kedua
+	'database' => 'Div_PSD', //nama database kedua
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['db5'] = array(
+	'dsn'   => '',
+	'hostname' => '172.16.30.2',
+	'username' => 'bck_cro', //username database kedua
+	'password' => '!paste_b1n', //password database kedua
+	'database' => 'Div_Audit_Internal', //nama database kedua
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['db6'] = array(
+	'dsn'   => '',
+	'hostname' => '172.16.30.2',
+	'username' => 'bck_cro', //username database kedua
+	'password' => '!paste_b1n', //password database kedua
+	'database' => 'Div_Keuangan', //nama database kedua
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['db7'] = array(
+	'dsn'   => '',
+	'hostname' => '172.16.30.2',
+	'username' => 'bck_cro', //username database kedua
+	'password' => '!paste_b1n', //password database kedua
+	'database' => 'Div_Marketing', //nama database kedua
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);

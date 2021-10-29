@@ -14,8 +14,8 @@
                     <thead>
                         <tr role="row">
                             <th>No</th>
-                            <!-- <th>Nama Uker</th>
-                            <th>Nama Subgroup</th> -->
+                            <th>Nama Uker</th>
+                            <th>Nama Subgroup</th>
                             <th>Nama User</th>
                             <th>Username</th>
                             <th>Status</th>
